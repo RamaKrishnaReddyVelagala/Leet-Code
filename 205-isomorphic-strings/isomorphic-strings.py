@@ -3,21 +3,14 @@ class Solution:
         if len(s) != len(t):
             return False
         
-        new_dict = {}
-        for i in range(len(s)):
-            if s[i] in new_dict:
-                if new_dict[s[i]] != t[i]:
+        s_dict, t_dict = {}, {}
+        for s_val, t_val in  zip(s, t):
+            if ((s_val in s_dict and s_dict[s_val] != t_val) or
+            (t_val in t_dict and t_dict[t_val] != s_val)):
                     return False
-            else:
-                new_dict[s[i]] = t[i]
-        
-        old_dict = {}
-        for i in range(len(t)):
-            if t[i] in old_dict:
-                if old_dict[t[i]] != s[i]:
-                    return False
-            else:
-                old_dict[t[i]] = s[i]
+            s_dict[s_val] = t_val
+            t_dict[t_val] = s_val
+
         return True
 
 
